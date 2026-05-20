@@ -21,7 +21,7 @@
             --light-grey: #cccccc;
         }
 
-        html { scroll-snap-type: y proximity; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--black);
@@ -876,12 +876,6 @@
 
         .reveal.in, .reveal-l.in, .reveal-r.in { opacity: 1; transform: none; }
 
-        /* ── SCROLL SNAP ── */
-        #hero, #stats, #servicios, #nosotros, #proceso, #galeria, #contacto, footer {
-            scroll-snap-align: start;
-            scroll-snap-stop: normal;
-        }
-
         /* ── HAMBURGER ── */
         .hamburger {
             display: none;
@@ -1306,70 +1300,6 @@
     </footer>
 
     <script>
-        // Magnetic scroll
-        const snapSections = [...document.querySelectorAll('#hero, #stats, #servicios, #nosotros, #proceso, #galeria, #contacto, footer')];
-        let scrollY = window.scrollY;
-        let targetY = window.scrollY;
-        let rafId = null;
-        let snapTimer = null;
-        let userScrolling = false;
-
-        function lerp(a, b, t) { return a + (b - a) * t; }
-
-        function getNearestSnap(y) {
-            let best = snapSections[0];
-            let bestDist = Infinity;
-            snapSections.forEach(s => {
-                const top = s.getBoundingClientRect().top + window.scrollY;
-                const dist = Math.abs(top - y);
-                if (dist < bestDist) { bestDist = dist; best = s; }
-            });
-            return best.getBoundingClientRect().top + window.scrollY;
-        }
-
-        function animateScroll() {
-            scrollY = lerp(scrollY, targetY, 0.09);
-            window.scrollTo(0, scrollY);
-            if (Math.abs(scrollY - targetY) > 0.8) {
-                rafId = requestAnimationFrame(animateScroll);
-            } else {
-                scrollY = targetY;
-                window.scrollTo(0, targetY);
-                rafId = null;
-            }
-        }
-
-        window.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            userScrolling = true;
-            targetY = Math.max(0, Math.min(document.documentElement.scrollHeight - window.innerHeight, targetY + e.deltaY * 1.4));
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = requestAnimationFrame(animateScroll);
-
-            clearTimeout(snapTimer);
-            snapTimer = setTimeout(() => {
-                targetY = getNearestSnap(targetY);
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = requestAnimationFrame(animateScroll);
-                userScrolling = false;
-            }, 180);
-        }, { passive: false });
-
-        // Touch magnetic snap
-        let touchStartY = 0;
-        window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
-        window.addEventListener('touchend', e => {
-            const diff = touchStartY - e.changedTouches[0].clientY;
-            if (Math.abs(diff) < 10) return;
-            clearTimeout(snapTimer);
-            snapTimer = setTimeout(() => {
-                targetY = getNearestSnap(window.scrollY);
-                scrollY = window.scrollY;
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = requestAnimationFrame(animateScroll);
-            }, 120);
-        }, { passive: true });
-
         // Particles
         const pc = document.getElementById('particles');
         for (let i = 0; i < 35; i++) {
@@ -1429,16 +1359,11 @@
 
         document.querySelectorAll('.stat-n[data-target]').forEach(el => cio.observe(el));
 
-        // Nav smooth scroll via magnetic engine
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 const t = document.querySelector(a.getAttribute('href'));
-                if (!t) return;
-                e.preventDefault();
-                scrollY = window.scrollY;
-                targetY = t.getBoundingClientRect().top + window.scrollY;
-                if (rafId) cancelAnimationFrame(rafId);
-                rafId = requestAnimationFrame(animateScroll);
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
 
