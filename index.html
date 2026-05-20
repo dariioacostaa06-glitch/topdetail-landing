@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP DETAIL Garage | Detailing Premium en Fernán Núñez</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Dancing+Script:wght@700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red: #e8192c;
+            --red-glow: #ff2d44;
+            --black: #080808;
+            --dark: #0f0f0f;
+            --dark2: #1a1a1a;
+            --white: #ffffff;
+            --grey: #888888;
+            --light-grey: #cccccc;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 22px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(8,8,8,0.96);
+            backdrop-filter: blur(20px);
+            padding: 14px 60px;
+            border-bottom: 1px solid rgba(232,25,44,0.2);
+        }
+
+        .nav-logo img {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(232,25,44,0.5));
+            transition: filter 0.3s;
+        }
+
+        .nav-logo img:hover {
+            filter: drop-shadow(0 0 14px rgba(232,25,44,0.8));
+        }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+
+        .nav-links a {
+            color: var(--light-grey);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--red) !important;
+            color: var(--white) !important;
+            padding: 9px 22px;
+            font-weight: 600 !important;
+            box-shadow: 0 0 20px rgba(232,25,44,0.3);
+            transition: box-shadow 0.3s, transform 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            box-shadow: 0 0 40px rgba(232,25,44,0.6) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* ── HERO ── */
+        #hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 50%, rgba(232,25,44,0.09) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 50%, rgba(232,25,44,0.06) 0%, transparent 55%),
+                var(--black);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(232,25,44,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232,25,44,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridDrift 25s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0%   { transform: perspective(600px) rotateX(12deg) translateY(0); }
+            100% { transform: perspective(600px) rotateX(12deg) translateY(60px); }
+        }
+
+        #particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--red);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0%   { transform: translateY(105vh) translateX(0); opacity: 0; }
+            8%   { opacity: 0.8; }
+            92%  { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(var(--dx)); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(232,25,44,0.35);
+            color: var(--red);
+            padding: 5px 20px;
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            animation: fadeDown 0.7s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-logo-img {
+            width: min(600px, 85vw);
+            height: auto;
+            filter:
+                drop-shadow(0 0 30px rgba(232,25,44,0.9))
+                drop-shadow(0 0 70px rgba(232,25,44,0.5))
+                drop-shadow(0 0 120px rgba(232,25,44,0.25));
+            animation: neonPulse 3.5s ease-in-out infinite, fadeUp 0.7s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow:
+                    0 0 20px rgba(232,25,44,0.9),
+                    0 0 50px rgba(232,25,44,0.5),
+                    0 0 100px rgba(232,25,44,0.25);
+            }
+            50% {
+                text-shadow:
+                    0 0 30px rgba(232,25,44,1),
+                    0 0 70px rgba(232,25,44,0.8),
+                    0 0 130px rgba(232,25,44,0.45);
+            }
+        }
+
+        .hero-slogan {
+            font-size: clamp(0.85rem, 2vw, 1.15rem);
+            color: var(--light-grey);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 24px 0 50px;
+            animation: fadeUp 0.7s ease 0.7s forwards;
+            opacity: 0;
+        }
+
+        .hero-slogan em { color: var(--white); font-style: normal; font-weight: 600; }
+
+        .hero-btns {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.7s ease 0.9s forwards;
+            opacity: 0;
+        }
+
+        .btn-red {
+            background: var(--red);
+            color: var(--white);
+            padding: 15px 38px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 0 30px rgba(232,25,44,0.4);
+        }
+
+        .btn-red::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-red:hover::before { left: 100%; }
+        .btn-red:hover { box-shadow: 0 0 55px rgba(232,25,44,0.7); transform: translateY(-2px); }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            padding: 14px 38px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.25);
+            transition: all 0.3s;
+        }
+
+        .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--grey);
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: fadeUp 0.7s ease 1.2s forwards;
+            opacity: 0;
+        }
+
+        .scroll-bar {
+            width: 1px;
+            height: 38px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity: 1; transform: scaleY(1); }
+            50%      { opacity: 0.3; transform: scaleY(0.5); }
+        }
+
+        /* ── STATS ── */
+        #stats {
+            background: var(--dark2);
+            border-top: 1px solid rgba(232,25,44,0.15);
+            border-bottom: 1px solid rgba(232,25,44,0.15);
+            padding: 60px 0;
+        }
+
+        .stats-row {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 0 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 16px;
+            position: relative;
+        }
+
+        .stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 15%; height: 70%;
+            width: 1px;
+            background: rgba(232,25,44,0.15);
+        }
+
+        .stat-n {
+            font-family: 'Cinzel', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--red);
+            display: block;
+            text-shadow: 0 0 20px rgba(232,25,44,0.4);
+        }
+
+        .stat-l {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--grey);
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* ── SECTION HEADER ── */
+        .sec-head { text-align: center; margin-bottom: 70px; }
+        .sec-tag {
+            display: inline-block;
+            color: var(--red);
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .sec-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .sec-line {
+            width: 50px; height: 2px;
+            background: var(--red);
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(232,25,44,0.5);
+        }
+
+        /* ── SERVICES ── */
+        #servicios {
+            padding: 110px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .svc-card {
+            background: var(--dark);
+            padding: 46px 36px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.025);
+        }
+
+        .svc-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.45s ease;
+        }
+
+        .svc-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top left, rgba(232,25,44,0.07) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+
+        .svc-card:hover::before { transform: scaleX(1); }
+        .svc-card:hover::after  { opacity: 1; }
+        .svc-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+
+        .svc-num {
+            position: absolute;
+            top: 26px; right: 26px;
+            font-family: 'Cinzel', serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: rgba(232,25,44,0.055);
+            line-height: 1;
+            transition: color 0.4s;
+            pointer-events: none;
+        }
+
+        .svc-card:hover .svc-num { color: rgba(232,25,44,0.11); }
+
+        .svc-icon {
+            width: 52px; height: 52px;
+            margin-bottom: 26px;
+            position: relative; z-index: 1;
+        }
+
+        .svc-icon svg { width: 100%; height: 100%; stroke: var(--red); fill: none; stroke-width: 1.4; }
+
+        .svc-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            position: relative; z-index: 1;
+        }
+
+        .svc-desc {
+            color: var(--grey);
+            font-size: 0.93rem;
+            line-height: 1.75;
+            position: relative; z-index: 1;
+        }
+
+        .svc-tag {
+            display: inline-block;
+            margin-top: 18px;
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            color: var(--red);
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(232,25,44,0.3);
+            padding-bottom: 2px;
+            position: relative; z-index: 1;
+        }
+
+        /* ── ABOUT ── */
+        #nosotros {
+            padding: 110px 40px;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #nosotros::before {
+            content: '';
+            position: absolute;
+            right: -250px; top: -250px;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(232,25,44,0.05) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .about-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 90px;
+            align-items: center;
+        }
+
+        .about-text .sec-head { text-align: left; margin-bottom: 0; }
+        .about-text .sec-line { margin: 0; }
+
+        .about-p {
+            color: var(--grey);
+            font-size: 1rem;
+            line-height: 1.9;
+            margin-top: 26px;
+        }
+
+        .about-p strong { color: var(--white); }
+
+        .about-feats {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .feat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--light-grey);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .feat-dot {
+            width: 6px; height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(232,25,44,0.6);
+        }
+
+        .about-card {
+            background: var(--black);
+            border: 1px solid rgba(232,25,44,0.15);
+            padding: 50px;
+            position: relative;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: 40px;
+            width: 80px; height: 2px;
+            background: var(--red);
+            box-shadow: 0 0 10px rgba(232,25,44,0.5);
+        }
+
+        .about-quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--white);
+            line-height: 1.45;
+            margin-bottom: 26px;
+        }
+
+        .about-author {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .about-deco {
+            position: absolute;
+            bottom: -18px; right: -18px;
+            width: 100px; height: 100px;
+            border: 1px solid rgba(232,25,44,0.12);
+            pointer-events: none;
+        }
+
+        /* ── PROCESS ── */
+        #proceso {
+            padding: 110px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .process-row::before {
+            content: '';
+            position: absolute;
+            top: 34px;
+            left: 12.5%; right: 12.5%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,25,44,0.25), rgba(232,25,44,0.25), transparent);
+        }
+
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-n {
+            width: 68px; height: 68px;
+            border: 1px solid rgba(232,25,44,0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 26px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--red);
+            background: var(--black);
+            position: relative; z-index: 1;
+            transition: all 0.4s;
+        }
+
+        .step:hover .step-n {
+            background: var(--red);
+            color: var(--white);
+            box-shadow: 0 0 30px rgba(232,25,44,0.5);
+        }
+
+        .step-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .step-desc { color: var(--grey); font-size: 0.85rem; line-height: 1.7; }
+
+        /* ── GALLERY ── */
+        #galeria {
+            padding: 110px 40px;
+            background: var(--dark);
+        }
+
+        .gallery-wrap { max-width: 1400px; margin: 0 auto; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 280px 280px;
+            gap: 4px;
+        }
+
+        .g-item {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .g-item:first-child { grid-row: span 2; }
+
+        .g-bg {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease;
+        }
+
+        .g-item:nth-child(1) .g-bg { background: linear-gradient(135deg, #1c0407, #0d0d0d); }
+        .g-item:nth-child(2) .g-bg { background: linear-gradient(135deg, #100d0d, #1a0608); }
+        .g-item:nth-child(3) .g-bg { background: linear-gradient(135deg, #0d100d, #0d0d0d); }
+        .g-item:nth-child(4) .g-bg { background: linear-gradient(135deg, #0d0d14, #1a0608); }
+        .g-item:nth-child(5) .g-bg { background: linear-gradient(135deg, #100d0d, #0d0d0d); }
+
+        .g-item:hover .g-bg { transform: scale(1.05); }
+
+        .g-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(232,25,44,0.88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .g-item:hover .g-overlay { opacity: 1; }
+
+        .g-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .g-icon { stroke: rgba(232,25,44,0.2); fill: none; }
+
+        /* ── CONTACT ── */
+        #contacto {
+            padding: 110px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-desc {
+            color: var(--grey);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            max-width: 580px;
+            margin: 26px auto 56px;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-bottom: 56px;
+        }
+
+        .cc {
+            background: var(--dark);
+            padding: 36px 26px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.3s;
+        }
+
+        .cc:hover { border-color: rgba(232,25,44,0.2); background: var(--dark2); }
+
+        .cc-icon { width: 36px; height: 36px; margin: 0 auto 16px; }
+        .cc-icon svg { width: 100%; height: 100%; stroke: var(--red); fill: none; stroke-width: 1.5; }
+
+        .cc-lbl {
+            display: block;
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--grey);
+            margin-bottom: 7px;
+        }
+
+        .cc-val { font-size: 1rem; font-weight: 600; }
+
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #25D366;
+            color: var(--white);
+            padding: 18px 48px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            box-shadow: 0 0 40px rgba(37,211,102,0.3);
+        }
+
+        .wa-btn:hover {
+            background: #1db954;
+            box-shadow: 0 0 60px rgba(37,211,102,0.55);
+            transform: translateY(-3px);
+        }
+
+        .wa-btn svg { width: 22px; height: 22px; fill: var(--white); }
+
+        /* ── FLOAT WHATSAPP ── */
+        .float-wa {
+            position: fixed;
+            bottom: 36px; right: 36px;
+            z-index: 999;
+            width: 58px; height: 58px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 30px rgba(37,211,102,0.4);
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: waFloat 3s ease-in-out infinite;
+        }
+
+        .float-wa::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(37,211,102,0.3);
+            animation: waRipple 2.2s ease-out infinite;
+        }
+
+        @keyframes waRipple {
+            0%   { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        @keyframes waFloat {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-7px); }
+        }
+
+        .float-wa:hover {
+            background: #1db954;
+            box-shadow: 0 4px 45px rgba(37,211,102,0.65);
+            animation: none;
+            transform: scale(1.1);
+        }
+
+        .float-wa svg { width: 26px; height: 26px; fill: var(--white); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark2);
+            border-top: 1px solid rgba(232,25,44,0.12);
+            padding: 60px 40px 28px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer-brand p { color: var(--grey); font-size: 0.88rem; line-height: 1.7; max-width: 270px; margin-top: 16px; }
+
+        .footer-col h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+
+        .footer-col ul a { color: var(--grey); text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+        .footer-col ul a:hover { color: var(--red); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 26px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.18);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal, .reveal-l, .reveal-r {
+            opacity: 0;
+            transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .reveal   { transform: translateY(40px); }
+        .reveal-l { transform: translateX(-40px); }
+        .reveal-r { transform: translateX(40px); }
+
+        .reveal.in, .reveal-l.in, .reveal-r.in { opacity: 1; transform: none; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            nav, nav.scrolled { padding-left: 24px; padding-right: 24px; }
+            .nav-links { display: none; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-wrap { grid-template-columns: 1fr; gap: 50px; }
+            .process-row { grid-template-columns: repeat(2,1fr); }
+            .process-row::before { display: none; }
+            .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: 250px 250px 250px; }
+            .g-item:first-child { grid-row: span 1; }
+            .stats-row { grid-template-columns: repeat(2,1fr); }
+            .contact-cards { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+
+        @media (max-width: 600px) {
+            .services-grid, .gallery-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2,1fr); }
+            .hero-btns { flex-direction: column; align-items: center; }
+            .process-row { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <img src="logo.png" alt="Top Detail Garage">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+        </ul>
+    </nav>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/34643182964" target="_blank" rel="noopener" class="float-wa" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div id="particles"></div>
+
+        <div class="hero-content">
+            <span class="hero-badge">✦ Fernán Núñez, Córdoba ✦</span>
+            <img src="logo.png" alt="Top Detail Garage" class="hero-logo-img">
+            <p class="hero-slogan">Más que Detailing, <em>una experiencia de renovación</em></p>
+            <div class="hero-btns">
+                <a href="https://wa.me/34643182964?text=Hola!%20Quisiera%20pedir%20informaci%C3%B3n%20sobre%20vuestros%20servicios." target="_blank" rel="noopener" class="btn-red">Pedir Cita</a>
+                <a href="#servicios" class="btn-ghost">Ver Servicios</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-bar"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats">
+        <div class="stats-row">
+            <div class="stat reveal"><span class="stat-n" data-target="500">0</span><span class="stat-l">Vehículos Tratados</span></div>
+            <div class="stat reveal"><span class="stat-n" data-target="5">0</span><span class="stat-l">Años de Experiencia</span></div>
+            <div class="stat reveal"><span class="stat-n" data-target="100">0</span><span class="stat-l">% Satisfacción</span></div>
+            <div class="stat reveal"><span class="stat-n" data-target="6">0</span><span class="stat-l">Servicios Premium</span></div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicios">
+        <div class="sec-head reveal">
+            <span class="sec-tag">— Nuestros Servicios —</span>
+            <h2 class="sec-title">Tratamiento de<br>Alto Nivel</h2>
+            <div class="sec-line"></div>
+        </div>
+
+        <div class="services-grid">
+            <div class="svc-card reveal">
+                <span class="svc-num">01</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3 class="svc-title">Detallado Integral</h3>
+                <p class="svc-desc">Limpieza profunda interior y exterior con productos de gama alta. Cada rincón de tu vehículo tratado con precisión y cuidado extremo.</p>
+                <span class="svc-tag">Interior + Exterior</span>
+            </div>
+
+            <div class="svc-card reveal">
+                <span class="svc-num">02</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3 class="svc-title">Pulido y Corrección</h3>
+                <p class="svc-desc">Eliminamos arañazos, swirls y marcas de oxidación. Restauramos la profundidad del color original de tu pintura con técnica profesional.</p>
+                <span class="svc-tag">Corrección de Pintura</span>
+            </div>
+
+            <div class="svc-card reveal">
+                <span class="svc-num">03</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="svc-title">Recubrimiento Cerámico</h3>
+                <p class="svc-desc">Nanotecnología cerámica que protege tu vehículo durante años. Repele agua, suciedad y rayos UV manteniendo el brillo desde el día uno.</p>
+                <span class="svc-tag">Protección 3–5 años</span>
+            </div>
+
+            <div class="svc-card reveal">
+                <span class="svc-num">04</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/></svg>
+                </div>
+                <h3 class="svc-title">Lavado Premium</h3>
+                <p class="svc-desc">Lavado a mano con espuma activa y productos de pH neutro. Secado sin contacto para garantizar cero arañazos en la carrocería.</p>
+                <span class="svc-tag">Sin Arañazos</span>
+            </div>
+
+            <div class="svc-card reveal">
+                <span class="svc-num">05</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
+                <h3 class="svc-title">Restauración de Faros</h3>
+                <p class="svc-desc">Devolvemos la transparencia original a los ópticos opacos o amarillentos. Mejora inmediata en la seguridad vial y la estética del vehículo.</p>
+                <span class="svc-tag">Resultados Inmediatos</span>
+            </div>
+
+            <div class="svc-card reveal">
+                <span class="svc-num">06</span>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 6l9-4 9 4v6c0 5.25-3.75 10.14-9 11.25C6.75 22.14 3 17.25 3 12V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <h3 class="svc-title">Descontaminación</h3>
+                <p class="svc-desc">Eliminación total de partículas férricas, brea, resinas y contaminantes adheridos. Base imprescindible antes de cualquier tratamiento de protección.</p>
+                <span class="svc-tag">Preparación Total</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="nosotros">
+        <div class="about-wrap">
+            <div class="about-text">
+                <div class="sec-head">
+                    <span class="sec-tag">— Nuestra Filosofía —</span>
+                    <h2 class="sec-title">Pasión por<br>la Perfección</h2>
+                    <div class="sec-line"></div>
+                </div>
+                <p class="about-p reveal-l">En <strong>Top Detail Garage</strong> no hacemos lavados, hacemos <strong>transformaciones</strong>. Cada vehículo que cruza nuestras puertas recibe el mismo nivel de atención que una obra de arte.</p>
+                <p class="about-p reveal-l">Ubicados en <strong>Fernán Núñez, Córdoba</strong>, somos especialistas para quienes exigen el mejor estado posible para su vehículo. Perfeccionismo, no es una palabra que usemos a la ligera.</p>
+                <div class="about-feats reveal-l">
+                    <div class="feat"><div class="feat-dot"></div><span>Productos profesionales certificados</span></div>
+                    <div class="feat"><div class="feat-dot"></div><span>Técnicos especializados y formados</span></div>
+                    <div class="feat"><div class="feat-dot"></div><span>Trato personalizado para cada caso</span></div>
+                    <div class="feat"><div class="feat-dot"></div><span>Garantía en todos los servicios</span></div>
+                </div>
+            </div>
+
+            <div class="reveal-r" style="position:relative">
+                <div class="about-card">
+                    <p class="about-quote">"Más que Detailing, una experiencia de renovación"</p>
+                    <span class="about-author">— Top Detail Garage</span>
+                </div>
+                <div class="about-deco"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="proceso">
+        <div class="sec-head reveal">
+            <span class="sec-tag">— Cómo Trabajamos —</span>
+            <h2 class="sec-title">Nuestro Proceso</h2>
+            <div class="sec-line"></div>
+        </div>
+
+        <div class="process-row">
+            <div class="step reveal">
+                <div class="step-n">01</div>
+                <h4 class="step-title">Inspección</h4>
+                <p class="step-desc">Analizamos el estado real de tu vehículo y te recomendamos el tratamiento más adecuado sin compromiso.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-n">02</div>
+                <h4 class="step-title">Preparación</h4>
+                <p class="step-desc">Descontaminación y lavado profundo para dejar la superficie en condiciones óptimas para el tratamiento.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-n">03</div>
+                <h4 class="step-title">Tratamiento</h4>
+                <p class="step-desc">Aplicamos el servicio con precisión milimétrica usando los mejores productos del mercado profesional.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-n">04</div>
+                <h4 class="step-title">Entrega</h4>
+                <p class="step-desc">Revisión final exhaustiva y entrega impecable. Tu vehículo, de vuelta como el primer día.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="galeria">
+        <div class="gallery-wrap">
+            <div class="sec-head reveal">
+                <span class="sec-tag">— Nuestro Trabajo —</span>
+                <h2 class="sec-title">Galería</h2>
+                <div class="sec-line"></div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="g-item reveal">
+                    <div class="g-bg"><svg class="g-icon" width="52" height="52" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                </div>
+                <div class="g-item reveal">
+                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                </div>
+                <div class="g-item reveal">
+                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                </div>
+                <div class="g-item reveal">
+                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                </div>
+                <div class="g-item reveal">
+                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contacto">
+        <div class="sec-head reveal">
+            <span class="sec-tag">— Hablemos —</span>
+            <h2 class="sec-title">Reserva tu Cita</h2>
+            <div class="sec-line"></div>
+        </div>
+
+        <p class="contact-desc reveal">Tu coche merece el mejor cuidado. Escríbenos y te asesoramos sin compromiso sobre el tratamiento más adecuado para tu vehículo.</p>
+
+        <div class="contact-cards">
+            <div class="cc reveal">
+                <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg></div>
+                <span class="cc-lbl">Teléfono</span>
+                <span class="cc-val">643 182 964</span>
+            </div>
+            <div class="cc reveal">
+                <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <span class="cc-lbl">Ubicación</span>
+                <span class="cc-val">Fernán Núñez, Córdoba</span>
+            </div>
+            <div class="cc reveal">
+                <div class="cc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                <span class="cc-lbl">Horario</span>
+                <span class="cc-val">Lun–Sáb · 9:00–19:00</span>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <a href="https://wa.me/34643182964?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20detailing." target="_blank" rel="noopener" class="wa-btn">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Contactar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="nav-logo">
+                    <img src="logo.png" alt="Top Detail Garage">
+                </div>
+                <p>Especialistas en detailing de alto nivel, pulido profesional y recubrimientos cerámicos. Fernán Núñez, Córdoba.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Detallado Integral</a></li>
+                    <li><a href="#servicios">Pulido y Corrección</a></li>
+                    <li><a href="#servicios">Recubrimiento Cerámico</a></li>
+                    <li><a href="#servicios">Lavado Premium</a></li>
+                    <li><a href="#servicios">Restauración de Faros</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="tel:+34643182964">643 182 964</a></li>
+                    <li><a href="https://wa.me/34643182964" target="_blank">WhatsApp</a></li>
+                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                    <li><a href="#contacto">Reservar cita</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Top Detail Garage — Fernán Núñez, Córdoba</span>
+            <span>Hecho con pasión por el detailing</span>
+        </div>
+    </footer>
+
+    <script>
+        // Particles
+        const pc = document.getElementById('particles');
+        for (let i = 0; i < 35; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.cssText = `
+                left: ${Math.random() * 100}%;
+                --dx: ${(Math.random() - 0.5) * 180}px;
+                animation-duration: ${Math.random() * 12 + 8}s;
+                animation-delay: ${Math.random() * 12}s;
+                width: ${Math.random() * 2.5 + 1}px;
+                height: ${Math.random() * 2.5 + 1}px;
+                opacity: 0;
+            `;
+            pc.appendChild(p);
+        }
+
+        // Navbar scroll
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // Scroll reveal with stagger
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const siblings = el.parentElement.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+                let delay = 0;
+                siblings.forEach((s, i) => { if (s === el) delay = i * 120; });
+                setTimeout(() => el.classList.add('in'), delay);
+                io.unobserve(el);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+
+        // Counter
+        const cio = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = +el.dataset.target;
+                const suffix = target === 100 ? '%' : '+';
+                const duration = 1800;
+                const step = target / (duration / 16);
+                let cur = 0;
+                const timer = setInterval(() => {
+                    cur = Math.min(cur + step, target);
+                    el.textContent = Math.floor(cur) + suffix;
+                    if (cur >= target) clearInterval(timer);
+                }, 16);
+                cio.unobserve(el);
+            });
+        }, { threshold: 0.6 });
+
+        document.querySelectorAll('.stat-n[data-target]').forEach(el => cio.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+    </script>
+</body>
+</html>
