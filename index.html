@@ -121,10 +121,20 @@
         .hero-bg {
             position: absolute;
             inset: 0;
+            background-image: url('img_garage_suv.png');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.25) saturate(0.6);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
             background:
-                radial-gradient(ellipse at 15% 50%, rgba(232,25,44,0.09) 0%, transparent 55%),
-                radial-gradient(ellipse at 85% 50%, rgba(232,25,44,0.06) 0%, transparent 55%),
-                var(--black);
+                radial-gradient(ellipse at 15% 50%, rgba(232,25,44,0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 50%, rgba(232,25,44,0.1) 0%, transparent 55%),
+                linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.7) 100%);
         }
 
         .hero-grid {
@@ -497,6 +507,15 @@
             pointer-events: none;
         }
 
+        .mascot-deco {
+            position: absolute;
+            bottom: 0; left: -40px;
+            width: 220px; height: auto;
+            opacity: 0.07;
+            pointer-events: none;
+            filter: grayscale(1);
+        }
+
         .about-wrap {
             max-width: 1200px;
             margin: 0 auto;
@@ -572,6 +591,23 @@
             text-transform: uppercase;
             color: var(--red);
         }
+
+        .about-img-wrap {
+            margin-top: 4px;
+            height: 200px;
+            overflow: hidden;
+            border: 1px solid rgba(232,25,44,0.15);
+        }
+
+        .about-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.85) saturate(0.8);
+            transition: transform 0.5s ease;
+        }
+
+        .about-img-wrap:hover img { transform: scale(1.04); }
 
         .about-deco {
             position: absolute;
@@ -672,15 +708,18 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.5s ease;
+            background: var(--dark2);
         }
 
-        .g-item:nth-child(1) .g-bg { background: linear-gradient(135deg, #1c0407, #0d0d0d); }
-        .g-item:nth-child(2) .g-bg { background: linear-gradient(135deg, #100d0d, #1a0608); }
-        .g-item:nth-child(3) .g-bg { background: linear-gradient(135deg, #0d100d, #0d0d0d); }
-        .g-item:nth-child(4) .g-bg { background: linear-gradient(135deg, #0d0d14, #1a0608); }
-        .g-item:nth-child(5) .g-bg { background: linear-gradient(135deg, #100d0d, #0d0d0d); }
+        .g-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
 
-        .g-item:hover .g-bg { transform: scale(1.05); }
+        .g-item:hover .g-bg img { transform: scale(1.06); }
 
         .g-overlay {
             position: absolute;
@@ -1135,6 +1174,7 @@
 
     <!-- ABOUT -->
     <section id="nosotros">
+        <img src="img_mascot.png" alt="" class="mascot-deco" aria-hidden="true">
         <div class="about-wrap">
             <div class="about-text">
                 <div class="sec-head">
@@ -1156,6 +1196,9 @@
                 <div class="about-card">
                     <p class="about-quote">"Más que Detailing, una experiencia de renovación"</p>
                     <span class="about-author">— Top Detail Garage</span>
+                </div>
+                <div class="about-img-wrap">
+                    <img src="img_interior_wrap.png" alt="Interior detallado">
                 </div>
                 <div class="about-deco"></div>
             </div>
@@ -1205,24 +1248,24 @@
 
             <div class="gallery-grid">
                 <div class="g-item reveal">
-                    <div class="g-bg"><svg class="g-icon" width="52" height="52" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                    <div class="g-bg"><img src="img_garage_audi.png" alt="Audi TT en garage"></div>
+                    <div class="g-overlay"><span class="g-label">Exterior</span></div>
                 </div>
                 <div class="g-item reveal">
-                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                    <div class="g-bg"><img src="img_audi_red.png" alt="Interior Audi TT rojo"></div>
+                    <div class="g-overlay"><span class="g-label">Interior</span></div>
                 </div>
                 <div class="g-item reveal">
-                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                    <div class="g-bg"><img src="img_porsche.png" alt="Escudo Porsche detallado"></div>
+                    <div class="g-overlay"><span class="g-label">Detallado</span></div>
                 </div>
                 <div class="g-item reveal">
-                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                    <div class="g-bg"><img src="img_bmw_interior.png" alt="Interior BMW blanco"></div>
+                    <div class="g-overlay"><span class="g-label">Interior</span></div>
                 </div>
                 <div class="g-item reveal">
-                    <div class="g-bg"><svg class="g-icon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                    <div class="g-overlay"><span class="g-label">Ver Trabajo</span></div>
+                    <div class="g-bg"><img src="img_bmw_e28.png" alt="BMW E28 clásico"></div>
+                    <div class="g-overlay"><span class="g-label">Clásicos</span></div>
                 </div>
             </div>
         </div>
